@@ -1,18 +1,18 @@
 import "@/App.css";
 import { Toaster } from "sonner";
 import { SmoothScroll } from "./components/SmoothScroll";
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { FeaturedReview } from "./components/FeaturedReview";
-import { Marquee } from "./components/Marquee";
-import { ReviewsBento } from "./components/ReviewsBento";
-import { Method } from "./components/Method";
-import { Newsletter } from "./components/Newsletter";
-import { Footer } from "./components/Footer";
+import { Header } from "./components/clean/Header";
+import { Hero } from "./components/clean/Hero";
+import { FeaturedReview } from "./components/clean/FeaturedReview";
+import { Marquee } from "./components/clean/Marquee";
+import { ReviewsGrid } from "./components/clean/ReviewsGrid";
+import { Method } from "./components/clean/Method";
+import { Newsletter } from "./components/clean/Newsletter";
+import { Footer } from "./components/clean/Footer";
 
 function App() {
   return (
-    <div data-testid="myg-reviews-landing" className="App grain">
+    <div data-testid="myg-reviews-landing" className="App">
       <SmoothScroll />
       <Toaster position="bottom-center" richColors />
       <Header />
@@ -20,7 +20,7 @@ function App() {
         <Hero />
         <Marquee />
         <FeaturedReview />
-        <ReviewsBento />
+        <ReviewsGrid />
         <Method />
         <Newsletter />
       </main>
