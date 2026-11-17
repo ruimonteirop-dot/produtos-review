@@ -28,6 +28,9 @@ INDEXES: dict[str, list[IndexModel]] = {
         IndexModel([("id", ASCENDING)], name="id", unique=True),
         IndexModel([("timestamp", DESCENDING)], name="timestamp_desc"),
     ],
+    "newsletter": [
+        IndexModel([("email", ASCENDING)], name="email", unique=True),
+    ],
 }
 
 
@@ -85,6 +88,20 @@ async def get_status_checks(limit: int = Query(20, ge=1, le=100)):
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+class NewsletterIn(BaseModel):
+    email: str = Field(min_length=5, max_length=200, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+
+@api_router.post("/newsletter")
+async def subscribe(input: NewsletterIn):
+    email = input.email.strip().lower()
+    await db.newsletter.update_one(
+        {"email": email},
+        {"$setOnInsert": {"email": email, "created_at": datetime.now(timezone.utc).isoformat()}},
+        upsert=True,
+    )
+    return {"ok": True, "email": email}
 
 # Include the router in the main app
 app.include_router(api_router)

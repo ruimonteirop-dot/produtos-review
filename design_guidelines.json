@@ -1,0 +1,177 @@
+{
+  "project_info": {
+    "name": "Myg Reviews",
+    "type": "landing_page",
+    "language": "pt-BR",
+    "archetype": "ARCHETYPE 3 / ARCHETYPE 6 (Colorful & Playful Neo-Brutalist)",
+    "description": "Plataforma independente de reviews de produtos no Brasil com análises sinceras e diretas ao ponto, com foco em produtos de cozinha, tecnologia e utilidades domésticas."
+  },
+  "typography": {
+    "heading_font": "Plus Jakarta Sans / Outfit / Cabinet Grotesk (Display, Playful, Bold)",
+    "body_font": "DM Sans / Space Grotesk / Inter (Clean Humanist)",
+    "google_fonts_url": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap",
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-bold",
+      "h4": "text-lg sm:text-xl font-semibold",
+      "body": "text-base sm:text-lg leading-relaxed",
+      "small_label": "text-xs font-mono uppercase tracking-[0.2em]"
+    }
+  },
+  "colors": {
+    "mode": "light",
+    "palette": {
+      "background": "#FFFDF7",
+      "foreground": "#121316",
+      "primary_violet": "#7C3AED",
+      "accent_yellow": "#FACC15",
+      "accent_coral": "#FF5757",
+      "accent_mint": "#10B981",
+      "accent_cyan": "#06B6D4",
+      "surface_card": "#FFFFFF",
+      "surface_muted": "#F3F0E6",
+      "border_stroke": "#121316"
+    },
+    "neo_brutalist_borders": "2px solid #121316",
+    "neo_brutalist_shadows": "4px 4px 0px #121316",
+    "hover_shadows": "6px 6px 0px #121316"
+  },
+  "brand_assets": {
+    "logo_svg": "<svg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'><rect width='40' height='40' rx='12' fill='#7C3AED'/><circle cx='15' cy='16' r='4' fill='#FACC15'/><circle cx='25' cy='16' r='4' fill='#FF5757'/><path d='M12 26C12 26 16 30 20 30C24 30 28 26 28 26' stroke='#FFFFFF' stroke-width='3.5' stroke-linecap='round'/></svg>",
+    "favicon_setup": "SVG inline favicon injected into head as data:image/svg+xml"
+  },
+  "hero_featured_product": {
+    "name": "Seladora a Vácuo AP-25",
+    "subtitle": "A campeã de vendas para conservar alimentos por até 5x mais tempo",
+    "category": "Cozinha & Utilidades",
+    "score": "9.4",
+    "verdict_badge": "Escolha do Editor ⭐",
+    "affiliate_link": "#ver-preco-ap25",
+    "price_cta": "Ver preço na promoção",
+    "local_images": {
+      "box": "/products/box.webp",
+      "wrapped": "/products/wrapped.webp",
+      "unboxed": "/products/unboxed.webp"
+    },
+    "pros": [
+      "Selagem ultra-rápida em menos de 10 segundos",
+      "Acompanha rolo de sacos ranhurados BPA Free",
+      "Design compacto fácil de guardar na gaveta",
+      "Modo Seco e Úmido ajustável"
+    ],
+    "cons": [
+      "Cabo de energia poderia ser um pouco mais longo",
+      "Exige sacos ranhurados específicos para vácuo ideal"
+    ]
+  },
+  "additional_product_reviews": [
+    {
+      "id": "espresso-pro",
+      "title": "Cafeteira Espresso Oster Compacta",
+      "category": "Cozinha",
+      "score": "8.9",
+      "image_url": "https://images.unsplash.com/photo-1515940175183-6798529cb860?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "tag": "Mais Vendido",
+      "price_label": "Ver preço"
+    },
+    {
+      "id": "headphones-anc",
+      "title": "Fone Headphone ANC Noise Cancelling",
+      "category": "Áudio",
+      "score": "9.1",
+      "image_url": "https://images.unsplash.com/photo-1515940175183-6798529cb860?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "tag": "Áudio Premium",
+      "price_label": "Ver preço"
+    },
+    {
+      "id": "smartwatch-ultra",
+      "title": "Smartwatch Fitness OLED GPS",
+      "category": "Wearables",
+      "score": "8.7",
+      "image_url": "https://images.pexels.com/photos/34051742/pexels-photo-34051742.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "tag": "Custo-Benefício",
+      "price_label": "Ver preço"
+    },
+    {
+      "id": "keyboard-mech",
+      "title": "Teclado Mecânico Wireless Hot-Swap",
+      "category": "Tech",
+      "score": "9.5",
+      "image_url": "https://images.pexels.com/photos/10019141/pexels-photo-10019141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "tag": "Favorito do Autor",
+      "price_label": "Ver preço"
+    }
+  ],
+  "layout_and_sections": [
+    {
+      "section_id": "header",
+      "name": "Navegação Principal",
+      "style": "Glassmorphism flutuante ou barra fixa com borda 2px, z-50",
+      "elements": ["Logo Myg Reviews SVG", "Links: Análises, Destaque, Método, Sobre", "Botão CTA Destaque: 'Ver Última Review'"]
+    },
+    {
+      "section_id": "hero",
+      "name": "Hero Kinetic & Mask Reveal",
+      "style": "Fundo amarelado/creme, tipografia gigante com entrada linha por linha via Framer Motion, efeito 3D Tilt Card ao mover o mouse.",
+      "content": "Análises sem enrolação dos produtos que você realmente quer comprar.",
+      "badges": ["100% Independente", "Sem Jabá", "Testes Reais"]
+    },
+    {
+      "section_id": "featured_review",
+      "name": "Análise em Destaque (Seladora AP-25)",
+      "style": "Bento Hero de alta relevância visual. Alternador entre as 3 fotos locais (box.webp, wrapped.webp, unboxed.webp), ficha técnica, nota final 9.4, lista de Prós e Contras em formato de pílulas coloridas, botão 'Ver preço na promoção' com modal/link ativo."
+    },
+    {
+      "section_id": "latest_reviews_bento",
+      "name": "Bento Grid de Últimas Análises",
+      "style": "Grid 'Tetris' assimétrica com filtros de categoria (Todos, Cozinha, Tech, Áudio, Casa). Cada card possui borda marcante, tag de nota, foto de produto e CTA 'Ver preço'."
+    },
+    {
+      "section_id": "marquee",
+      "name": "Faixa Editorial em Movimento (Editorial Ribbon)",
+      "style": "Fundo roxo ou coral com texto em movimento contínuo via react-fast-marquee ou CSS keyframe: '• ANÁLISES SINCERAS • COMPRA CONSCIENTE • SEM CONTEÚDO PATROCINADO • TESTADO POR 30 DIAS •'"
+    },
+    {
+      "section_id": "review_methodology",
+      "name": "Como Avalio (Critérios & Método)",
+      "style": "Cartões coloridos com ícones demonstrando os 4 pilares: 1. Compra Própria, 2. Uso Real no Dia a Dia, 3. Medição Custo x Benefício, 4. Veredito Curto e Sincero."
+    },
+    {
+      "section_id": "newsletter",
+      "name": "Clube Myg Reviews (Captura)",
+      "style": "Caixa destaque Neo-Brutalista com campo de e-mail + botão enviar + aviso 'Zero Spam, apenas ofertas que valem a pena' e feedback com toast Sonner."
+    },
+    {
+      "section_id": "footer",
+      "name": "Rodapé Editorial",
+      "style": "Fundo escuro contrastante, aviso transparente de links de afiliados, marca registrada, links rápidos e atalho de topo."
+    }
+  ],
+  "motion_and_libraries": {
+    "smooth_scroll": "Lenis scroll ativado no window",
+    "framer_motion": "Animações de entrada com stagger e masked reveal, micro-interações em hovers dos botões 'Ver preço'",
+    "tilt_effect": "Transformação 3D suave no hero card com base no mouseX/mouseY"
+  },
+  "testing_and_data_ids": {
+    "main_container": "myg-reviews-landing",
+    "header": "header-navigation",
+    "hero_section": "hero-section",
+    "featured_review_card": "featured-review-ap25",
+    "ver_preco_ap25_btn": "ver-preco-ap25-button",
+    "price_modal": "price-affiliate-modal",
+    "reviews_grid": "reviews-bento-grid",
+    "category_filter": "category-filter-buttons",
+    "methodology_section": "methodology-section",
+    "newsletter_input": "newsletter-email-input",
+    "newsletter_submit": "newsletter-submit-button"
+  },
+  "instructions_to_main_agent": [
+    "Execute npm/yarn packages setup if needed: install lenis (@studio-freight/lenis or lenis), framer-motion, lucide-react, canvas-confetti, sonner if not present.",
+    "Ensure images at /products/box.webp, /products/wrapped.webp, /products/unboxed.webp are correctly referenced with fallbacks and lazy loading.",
+    "Implement interactive price popups or direct link triggers for every 'Ver preço' button so user action always responds dynamically.",
+    "Add filter states for review categories so clicking 'Cozinha' or 'Tech' filters the bento cards in real-time with smooth layout transitions.",
+    "Remove the emergent splash placeholder from App.js and ensure clean routing/rendering.",
+    "Add data-testid attributes to all buttons, input fields, filter tabs, and modal triggers."
+  ]
+}
