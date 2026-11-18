@@ -6,6 +6,15 @@ import { api, errText, imgSrc } from "../../lib/api";
 export const PhotoUploader = ({ photos, onChange }) => {
   const input = useRef(null);
   const [busy, setBusy] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const addUrl = () => {
+    const src = url.trim();
+    if (!src) return;
+    if (!src.startsWith("/") && !/^https?:\/\//.test(src)) { toast.error("O endereço deve começar por /products/ ou https://"); return; }
+    onChange([...photos, { src, label: "" }]);
+    setUrl("");
+  };
 
   const upload = async (files) => {
     if (!files?.length) return;
@@ -64,6 +73,17 @@ export const PhotoUploader = ({ photos, onChange }) => {
             {busy ? "A carregar…" : "Adicionar fotos"}
           </span>
         </button>
+      </div>
+      <div className="mt-3 flex gap-2">
+        <input
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addUrl(); } }}
+          placeholder="ou cole o endereço, ex.: /products/osram-1005-hero.jpg"
+          data-testid="photo-url-input"
+          className="flex-1 min-w-0 rounded-lg border border-[var(--line)] bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--ink)]"
+        />
+        <button type="button" onClick={addUrl} data-testid="photo-url-add" className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm hover:border-[var(--ink)]">Adicionar</button>
       </div>
       <input ref={input} type="file" accept="image/*" multiple hidden data-testid="photo-file-input" onChange={(e) => upload(Array.from(e.target.files || []))} />
     </div>
