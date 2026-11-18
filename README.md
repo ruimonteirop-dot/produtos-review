@@ -51,7 +51,7 @@ Entre em `/admin`. O campo "Texto da review" aceita:
 - `**negrito**`
 - linha em branco para separar parágrafos
 
-Ative "Recebido via Amazon Vine" sempre que o produto vier do Vine: a página mostra a divulgação.
+Ative "Produto oferecido para teste" sempre que receber o produto gratuitamente: a página mostra a divulgação.
 A nota é opcional; enquanto estiver vazia, a página não mostra nota.
 
 ## Desenvolvimento local

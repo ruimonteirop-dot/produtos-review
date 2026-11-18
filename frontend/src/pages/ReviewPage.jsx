@@ -5,7 +5,7 @@ import { Footer } from "../components/clean/Footer";
 import { PriceButton } from "../components/clean/Base";
 import { api, imgSrc } from "../lib/api";
 import { parseBody, inlineParts } from "../lib/body";
-import { DISCLOSURE_AFFILIATE, DISCLOSURE_VINE, formatScore, SITE } from "../data/reviews";
+import { DISCLOSURE_AFFILIATE, DISCLOSURE_GIFT, formatScore, SITE } from "../data/reviews";
 
 const Inline = ({ text }) => inlineParts(text).map((p, i) => (p.bold ? <strong key={i}>{p.text}</strong> : <span key={i}>{p.text}</span>));
 
@@ -77,7 +77,7 @@ export default function ReviewPage() {
             <h1 className="font-display tracking-[-0.035em] leading-[1.02] text-5xl sm:text-6xl mt-5">{r.name}</h1>
             {r.summary && <p className="mt-6 text-lg text-[var(--muted)] leading-relaxed max-w-xl">{r.summary}</p>}
             <p className="mt-6 text-sm text-[var(--muted)]">
-              {r.vine ? "Produto recebido via Amazon Vine. " : ""}
+              {r.vine ? "Produto oferecido para teste. " : ""}
               <a href="#divulgacao-review" className="underline underline-offset-4 hover:text-[var(--ink)]">Contém links de afiliado</a>
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-6">
@@ -144,7 +144,7 @@ export default function ReviewPage() {
           </div>
 
           <p id="divulgacao-review" className="mt-10 pt-6 border-t border-[var(--line)] text-sm text-[var(--muted)] leading-relaxed">
-            <strong className="text-[var(--ink)]">Transparência.</strong> {r.vine ? `${DISCLOSURE_VINE} ` : ""}{DISCLOSURE_AFFILIATE}
+            <strong className="text-[var(--ink)]">Transparência.</strong> {r.vine ? `${DISCLOSURE_GIFT} ` : ""}{DISCLOSURE_AFFILIATE}
           </p>
         </article>
       </main>

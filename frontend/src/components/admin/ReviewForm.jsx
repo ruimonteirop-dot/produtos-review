@@ -108,7 +108,7 @@ export const ReviewForm = ({ review, categories, onSaved, onCancel }) => {
           <input data-testid="form-price-url-input" type="url" value={f.price_url} onChange={set("price_url")} className={inputCls} placeholder="https://" />
         </Field>
         <div>
-          <Toggle id="form-vine-switch" label="Recebido via Amazon Vine" desc="Mostra a divulgação do Vine na página da review." checked={f.vine} onChange={set("vine")} />
+          <Toggle id="form-vine-switch" label="Produto oferecido para teste" desc="Mostra na página da review que o produto foi recebido gratuitamente." checked={f.vine} onChange={set("vine")} />
           <Toggle id="form-published-switch" label="Publicada" desc="Desliga para guardar como rascunho." checked={f.published} onChange={set("published")} />
           <Toggle id="form-featured-switch" label="Review em destaque" desc="Aparece no topo do site. Só pode haver uma." checked={f.featured} onChange={set("featured")} />
         </div>

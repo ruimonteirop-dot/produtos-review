@@ -96,7 +96,7 @@ export const FeaturedReview = ({ review }) => (
             <PriceButton url={review.price_url} testId="ver-preco-featured-button" label="Ver preço" />
             <Link to={`/reviews/${review.slug}`} data-testid="featured-read-more" className="text-sm font-medium underline underline-offset-4 hover:text-[var(--accent)]">Ler a review completa</Link>
           </div>
-          {review.vine && <p className="mt-6 text-xs text-[var(--muted)] leading-relaxed">Produto recebido gratuitamente através do Amazon Vine. Contém links de afiliado.</p>}
+          {review.vine && <p className="mt-6 text-xs text-[var(--muted)] leading-relaxed">Produto oferecido para teste. Contém links de afiliado.</p>}
         </Reveal>
       </div>
     </div>

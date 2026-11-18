@@ -11,7 +11,7 @@ const BUILD = path.join(__dirname, "..", "build");
 const API = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/$/, "");
 const SITE = (process.env.SITE_URL || process.env.REACT_APP_SITE_URL || process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` || "").replace(/\/$/, "");
 const SITE_NAME = "Myg Reviews";
-const DISCLOSURE_VINE = "Recebi este produto gratuitamente através do programa Amazon Vine. Ninguém reviu ou aprovou este texto antes da publicação.";
+const DISCLOSURE_GIFT = "Recebi este produto gratuitamente para teste. Ninguém reviu ou aprovou este texto antes da publicação.";
 const DISCLOSURE_AFFILIATE = "Como Associado da Amazon, recebo uma comissão pelas compras qualificadas feitas através dos links deste site, sem custo adicional para ti.";
 
 const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -84,7 +84,7 @@ function reviewStatic(r) {
 <p><a href="/">Reviews</a> / ${esc(r.category)}</p>
 <h1>${esc(r.name)}</h1>
 ${r.summary ? `<p>${esc(r.summary)}</p>` : ""}
-${r.vine ? "<p>Produto recebido via Amazon Vine. Contém links de afiliado.</p>" : "<p>Contém links de afiliado.</p>"}
+${r.vine ? "<p>Produto oferecido para teste. Contém links de afiliado.</p>" : "<p>Contém links de afiliado.</p>"}
 ${s !== null ? `<p>Nota: ${s.toFixed(1)}/10</p>` : ""}
 ${r.photos?.[0] ? `<img src="${esc(r.photos[0].src.startsWith("/api/") ? abs(r.photos[0].src) : r.photos[0].src)}" alt="${esc(r.name)}" style="max-width:100%;height:auto" />` : ""}
 ${r.pros?.length ? `<h2>Gostei</h2><ul>${r.pros.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
@@ -92,7 +92,7 @@ ${r.cons?.length ? `<h2>Menos bom</h2><ul>${r.cons.map((p) => `<li>${esc(p)}</li
 ${bodyHtml(r.body)}
 ${r.specs?.length ? `<h2>Especificações</h2><dl>${r.specs.map((x) => `<dt>${esc(x.label)}</dt><dd>${esc(x.value)}</dd>`).join("")}</dl>` : ""}
 ${r.price_url ? `<p><a href="${esc(r.price_url)}" rel="sponsored nofollow noopener">Ver preço na Amazon</a></p>` : ""}
-<p>${r.vine ? esc(DISCLOSURE_VINE) + " " : ""}${esc(DISCLOSURE_AFFILIATE)}</p>
+<p>${r.vine ? esc(DISCLOSURE_GIFT) + " " : ""}${esc(DISCLOSURE_AFFILIATE)}</p>
 </div>`;
 }
 
