@@ -20,13 +20,18 @@ const init = (r) => ({
 
 const inputCls = "w-full bg-transparent border-b border-[var(--line)] focus:border-[var(--ink)] py-2.5 outline-none transition-colors";
 
-const Field = ({ label, hint, children }) => (
-  <label className="block">
-    <span className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">{label}</span>
-    {children}
-    {hint && <span className="block mt-1.5 text-xs text-[var(--muted)]">{hint}</span>}
-  </label>
-);
+// group: usa <div> em vez de <label> quando o campo tem botões lá dentro
+// (um <label> reencaminha qualquer clique para o primeiro botão, o que apagava fotos).
+const Field = ({ label, hint, children, group = false }) => {
+  const Tag = group ? "div" : "label";
+  return (
+    <Tag className="block">
+      <span className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">{label}</span>
+      {children}
+      {hint && <span className="block mt-1.5 text-xs text-[var(--muted)]">{hint}</span>}
+    </Tag>
+  );
+};
 
 const Toggle = ({ id, label, desc, checked, onChange }) => (
   <div className="flex items-start justify-between gap-4 py-4 border-t border-[var(--line)]">
@@ -66,7 +71,7 @@ export const ReviewForm = ({ review, categories, onSaved, onCancel }) => {
       </div>
 
       <div className="mt-8 space-y-7">
-        <Field label="Fotos" hint="A primeira foto é a principal. Podes carregar várias de uma vez.">
+        <Field group label="Fotos" hint="A primeira foto é a principal. Podes carregar várias de uma vez ou colar o endereço.">
           <div className="mt-3"><PhotoUploader photos={f.photos} onChange={set("photos")} /></div>
         </Field>
         <Field label="Nome do produto">
