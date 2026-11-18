@@ -1,7 +1,7 @@
 import { ArrowUp } from "lucide-react";
 import { LogoMark } from "./Base";
 import { scrollToId } from "../SmoothScroll";
-import { SITE } from "../../data/reviews";
+import { SITE, DISCLOSURE_AFFILIATE } from "../../data/reviews";
 
 const LINKS = [["destaque", "Destaque"], ["reviews", "Reviews"], ["metodo", "Método"], ["clube", "Newsletter"]];
 
@@ -11,7 +11,7 @@ export const Footer = () => (
       <div className="grid md:grid-cols-12 gap-10">
         <div className="md:col-span-5">
           <div className="flex items-center gap-2.5"><LogoMark /><span className="font-display text-lg">Myg Reviews</span></div>
-          <p className="mt-5 max-w-sm text-sm text-[var(--muted)] leading-relaxed">Alguns links são de afiliado: se comprares através deles, posso ganhar uma comissão, sem custo extra para ti.</p>
+          <p id="divulgacao" className="mt-5 max-w-sm text-sm text-[var(--muted)] leading-relaxed">{DISCLOSURE_AFFILIATE} Alguns produtos são recebidos gratuitamente através do programa Amazon Vine, e isso é indicado em cada review.</p>
         </div>
         <ul className="md:col-span-3 space-y-2 text-sm">
           {LINKS.map(([id, label]) => (

@@ -22,7 +22,7 @@ export const Header = () => {
       className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${scrolled ? "glass border-b border-[var(--line)]" : "bg-transparent border-b border-transparent"}`}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#topo" data-testid="header-logo" className="flex items-center gap-2.5">
+        <a href="/" data-testid="header-logo" className="flex items-center gap-2.5">
           <LogoMark />
           <span className="font-display text-lg tracking-tight">Myg Reviews</span>
         </a>

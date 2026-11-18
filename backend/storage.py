@@ -1,40 +1,53 @@
+"""Armazenamento das fotos no Cloudflare R2 (compatível com S3).
+
+Variáveis de ambiente:
+  R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET
+"""
 import os
 import logging
 
-import requests
+import boto3
+from botocore.config import Config
 
-STORAGE_BASE = (os.environ.get("INTEGRATION_PROXY_URL") or "").strip() or "https://integrations.emergentagent.com"
-STORAGE_URL = STORAGE_BASE.rstrip("/") + "/objstore/api/v1/storage"
 APP_NAME = "myg-reviews"
-storage_key = None
+_client = None
+log = logging.getLogger(__name__)
+
+
+def _bucket() -> str:
+    return os.environ["R2_BUCKET"]
 
 
 def init_storage(force: bool = False):
-    global storage_key
-    if storage_key and not force:
-        return storage_key
-    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": os.environ["EMERGENT_LLM_KEY"]}, timeout=30)
-    resp.raise_for_status()
-    storage_key = resp.json()["storage_key"]
-    return storage_key
+    global _client
+    if _client is not None and not force:
+        return _client
+    if not os.environ.get("R2_ACCOUNT_ID"):
+        log.warning("R2 não configurado: o upload de fotos fica desligado até definir as variáveis R2_*.")
+        return None
+    _client = boto3.client(
+        "s3",
+        endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
+        aws_access_key_id=os.environ["R2_ACCESS_KEY_ID"],
+        aws_secret_access_key=os.environ["R2_SECRET_ACCESS_KEY"],
+        region_name="auto",
+        config=Config(signature_version="s3v4", retries={"max_attempts": 3}),
+    )
+    return _client
 
 
-def _call(method: str, path: str, **kw):
-    for attempt in range(2):
-        key = init_storage(force=attempt == 1)
-        headers = {"X-Storage-Key": key, **kw.pop("headers", {})}
-        resp = requests.request(method, f"{STORAGE_URL}/objects/{path}", headers=headers, **kw)
-        if resp.status_code != 404 or attempt == 1 or method == "GET":
-            resp.raise_for_status()
-            return resp
-        logging.getLogger(__name__).warning("storage 404, re-init")
-    return resp
+def _require():
+    client = init_storage()
+    if client is None:
+        raise RuntimeError("Armazenamento de fotos não configurado (R2_*).")
+    return client
 
 
 def put_object(path: str, data: bytes, content_type: str) -> dict:
-    return _call("PUT", path, headers={"Content-Type": content_type}, data=data, timeout=120).json()
+    _require().put_object(Bucket=_bucket(), Key=path, Body=data, ContentType=content_type)
+    return {"path": path, "size": len(data)}
 
 
 def get_object(path: str) -> tuple[bytes, str]:
-    resp = _call("GET", path, timeout=60)
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+    obj = _require().get_object(Bucket=_bucket(), Key=path)
+    return obj["Body"].read(), obj.get("ContentType", "application/octet-stream")

@@ -12,7 +12,7 @@ User choices: nome "Myg Reviews"; só o dono escreve reviews; botão "Ver preço
 
 ## User personas
 - Dono do site (escreve reviews, ganha por links de afiliado)
-- Leitor brasileiro procurando opinião sincera antes de comprar
+- Leitor português à procura de uma opinião honesta antes de comprar
 
 ## Core requirements
 - Hero cinético, review em destaque com nota/prós/contras/galeria, grid de reviews com filtro, método, newsletter, "Ver preço" por produto
@@ -26,6 +26,13 @@ User choices: nome "Myg Reviews"; só o dono escreve reviews; botão "Ver preço
 ## Implemented (2026-11-17)
 - Redesign clean (mesmo dia, a pedido): fundo off-white, tipografia Onest + Instrument Serif itálico, acento violeta único, linhas finas; componentes em `components/clean/`
 - Hero com reveal linha a linha, card 3D tilt + parallax, marquee editorial, review AP-25 com galeria das 3 fotos, bento com filtros, método, Clube Myg (newsletter real no Mongo), footer com aviso de afiliado, logo/favicon SVG
+
+## Implemented (2026-11-18, fora do Emergent)
+- Saída do Emergent: removidos scripts/analytics do Emergent, pacotes @emergentbase, plugin health-check; fotos passam para Cloudflare R2
+- Textos corrigidos: divulgação do Amazon Vine e de afiliado (deixou de dizer "compro tudo" / "sem patrocínios")
+- Reviews de exemplo inventadas removidas; seed só com a review real do CAREHABI AP-25 e fotos tratadas
+- Página por review em /reviews/<slug> (campos novos: slug, body, vine; nota opcional)
+- Pré-renderização no build com SEO, JSON-LD Product+Review, sitemap.xml, robots.txt; deploy hook do Vercel
 
 ## Backlog
 - P0: inserir links reais de "Ver preço" e textos/notas reais (hoje exemplos)

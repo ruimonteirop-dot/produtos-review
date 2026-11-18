@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { imgSrc } from "../../lib/api";
+import { Link } from "react-router-dom";
 import { Reveal, Label, PriceButton, EASE } from "./Base";
+import { formatScore } from "../../data/reviews";
 
 const Gallery = ({ review }) => {
   const [active, setActive] = useState(0);
@@ -74,9 +76,9 @@ export const FeaturedReview = ({ review }) => (
               <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent)]">{review.tag}</p>
               <h3 data-testid="featured-title" className="font-display text-2xl sm:text-3xl mt-2 tracking-tight">{review.name}</h3>
             </div>
-            <p data-testid="featured-score" className="font-display text-6xl tracking-tight leading-none">
-              {Number(review.score).toFixed(1)}<span className="text-base text-[var(--muted)]">/10</span>
-            </p>
+            {review.score != null && <p data-testid="featured-score" className="font-display text-6xl tracking-tight leading-none">
+              {formatScore(review.score)}<span className="text-base text-[var(--muted)]">/10</span>
+            </p>}
           </div>
           <div className="mt-8 space-y-8">
             {review.pros?.length > 0 && <List title="Prós" items={review.pros} sign="+" />}
@@ -90,7 +92,11 @@ export const FeaturedReview = ({ review }) => (
               </div>
             ))}
           </dl>
-          <div className="mt-10"><PriceButton url={review.price_url} testId="ver-preco-featured-button" label="Ver preço" /></div>
+          <div className="mt-10 flex flex-wrap items-center gap-5">
+            <PriceButton url={review.price_url} testId="ver-preco-featured-button" label="Ver preço" />
+            <Link to={`/reviews/${review.slug}`} data-testid="featured-read-more" className="text-sm font-medium underline underline-offset-4 hover:text-[var(--accent)]">Ler a review completa</Link>
+          </div>
+          {review.vine && <p className="mt-6 text-xs text-[var(--muted)] leading-relaxed">Produto recebido gratuitamente através do Amazon Vine. Contém links de afiliado.</p>}
         </Reveal>
       </div>
     </div>

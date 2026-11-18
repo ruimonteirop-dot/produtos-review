@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { FALLBACK_PHOTO } from "../../data/reviews";
+import { FALLBACK_PHOTO, formatScore } from "../../data/reviews";
 import { imgSrc } from "../../lib/api";
 import { EASE } from "./Base";
 import { scrollToId } from "../SmoothScroll";
@@ -34,21 +34,21 @@ const Photo = ({ featured }) => {
       <motion.div
         ref={ref}
         data-testid="hero-tilt-card"
-        style={{ rotateX: rx, rotateY: ry }}
+        style={{ rotateX: rx, rotateY: ry, background: "linear-gradient(#f5f6f8, #dbe1e9)" }}
         initial={{ clipPath: "inset(100% 0 0 0)" }}
         animate={{ clipPath: "inset(0% 0 0 0)" }}
         transition={{ duration: 1.4, ease: EASE, delay: 0.5 }}
         className="relative overflow-hidden rounded-[28px] bg-[var(--surface)] aspect-[4/5]"
       >
-        <motion.img style={{ y, scale: 1.18 }} src={imgSrc(featured?.photos?.[0]?.src) || FALLBACK_PHOTO} alt={featured?.name || "Produto em destaque"} className="absolute inset-0 w-full h-full object-cover object-[86%_50%]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,transparent_35%,rgba(0,0,0,0.35)_100%)]" />
+        <motion.img style={{ y, scale: 1.18 }} src={imgSrc(featured?.photos?.[0]?.src) || FALLBACK_PHOTO} alt={featured?.name || "Produto em destaque"} className="absolute inset-0 w-full h-full object-contain px-4" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_45%,rgba(0,0,0,0.18)_100%)]" />
         {featured && (
           <div data-testid="hero-score-badge" className="absolute left-4 right-4 bottom-4 flex items-center justify-between gap-3 rounded-2xl glass px-4 py-3">
             <div className="min-w-0">
               <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--muted)]">Review nova</p>
               <p className="font-display text-base truncate">{featured.name}</p>
             </div>
-            <p className="font-display text-3xl">{Number(featured.score).toFixed(1)}</p>
+            {featured.score != null && <p className="font-display text-3xl">{formatScore(featured.score)}</p>}
           </div>
         )}
       </motion.div>
@@ -61,14 +61,14 @@ export const Hero = ({ featured }) => (
     <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-14 lg:gap-16 items-end">
       <div className="lg:col-span-7">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-xs uppercase tracking-[0.22em] text-[var(--muted)]">
-          Testado em casa · Sem publicidade paga
+          Testado em casa · Origem sempre indicada
         </motion.p>
         <h1 data-testid="hero-title" className="font-display tracking-[-0.035em] leading-[0.98] text-[12vw] sm:text-7xl lg:text-[6.4rem] mt-6">
           {LINES.map((l, i) => <MaskLine key={i} i={i}>{l}</MaskLine>)}
         </h1>
         <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.9, ease: EASE }}>
           <p className="mt-8 max-w-md text-base sm:text-lg text-[var(--muted)] leading-relaxed">
-            Eu compro, uso a sério e digo-te se vale cada cêntimo. Nota, prós, contras e o link para o melhor preço.
+            Uso os produtos a sério, em casa, e digo-te se valem o preço. Nota, prós, contras e o link para a melhor oferta.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <button data-testid="hero-primary-cta" onClick={() => scrollToId("reviews")} className="rounded-full bg-[var(--ink)] text-[var(--on-ink)] px-7 py-3.5 text-sm font-medium hover:bg-[var(--accent)] hover:text-white transition-colors duration-300">

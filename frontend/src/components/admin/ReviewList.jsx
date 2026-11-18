@@ -1,3 +1,4 @@
+import { formatScore } from "../../data/reviews";
 import { Pencil, Trash2, Star } from "lucide-react";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription,
@@ -40,7 +41,7 @@ export const ReviewList = ({ reviews, activeId, onEdit, onDelete }) => (
           <div className="min-w-0">
             <p className="font-medium truncate">{r.name}</p>
             <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-              <span className="text-xs text-[var(--muted)] mr-1">{r.category} · {Number(r.score).toFixed(1)}</span>
+              <span className="text-xs text-[var(--muted)] mr-1">{r.category} · {formatScore(r.score)}</span>
               {r.featured && <Badge accent><Star className="inline w-3 h-3 -mt-0.5" /> Destaque</Badge>}
               <Badge>{r.published ? "Publicada" : "Rascunho"}</Badge>
             </div>

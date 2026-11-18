@@ -36,7 +36,7 @@ INDEXES: dict[str, list[IndexModel]] = {
     ],
     "users": [IndexModel([("email", ASCENDING)], name="email", unique=True), IndexModel([("id", ASCENDING)], name="id", unique=True)],
     "login_attempts": [IndexModel([("identifier", ASCENDING)], name="identifier")],
-    "reviews": [IndexModel([("id", ASCENDING)], name="id", unique=True), IndexModel([("published", ASCENDING), ("created_at", DESCENDING)], name="pub_created")],
+    "reviews": [IndexModel([("id", ASCENDING)], name="id", unique=True), IndexModel([("slug", ASCENDING)], name="slug"), IndexModel([("published", ASCENDING), ("created_at", DESCENDING)], name="pub_created")],
     "files": [IndexModel([("storage_path", ASCENDING)], name="storage_path")],
 }
 
@@ -70,7 +70,12 @@ class StatusCheckCreate(BaseModel):
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Myg Reviews API"}
+
+
+@api_router.get("/health")
+async def health():
+    return {"ok": True}
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
@@ -118,7 +123,7 @@ app.include_router(reviews_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=[o.strip().rstrip('/') for o in os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',') if o.strip()],
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal, Label, PriceButton, EASE } from "./Base";
 import { imgSrc } from "../../lib/api";
+import { Link } from "react-router-dom";
+import { formatScore } from "../../data/reviews";
 
 const spanFor = (i, n) => {
   const size = Math.min(4, n - Math.floor(i / 4) * 4);
@@ -27,16 +29,17 @@ const Card = ({ r, i, n }) => {
   >
     {r.photos?.[0]?.src && <img src={imgSrc(r.photos[0].src)} alt={r.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" />}
     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+    <Link to={`/reviews/${r.slug}`} aria-label={`Ler a review: ${r.name}`} className="absolute inset-0 z-[1]" />
     <div className="absolute top-4 left-4 right-4 flex justify-between">
       <span className="rounded-full glass px-3 py-1 text-[11px] uppercase tracking-[0.16em]">{r.category}</span>
-      <span data-testid={`review-score-${r.id}`} className="rounded-full glass px-3 py-1 font-display text-sm">{Number(r.score).toFixed(1)}</span>
+      {r.score != null && <span data-testid={`review-score-${r.id}`} className="rounded-full glass px-3 py-1 font-display text-sm">{formatScore(r.score)}</span>}
     </div>
-    <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-wrap items-end justify-between gap-3 text-white">
+    <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 flex flex-wrap items-end justify-between gap-3 text-white pointer-events-none">
       <div>
         <p className="text-xs text-white/80">{r.tag}</p>
         <h3 className={`font-display tracking-tight mt-1 ${big ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"}`}>{r.name}</h3>
       </div>
-      <PriceButton url={r.price_url} testId={`ver-preco-${r.id}`} dark={false} />
+      <span className="relative z-[2] pointer-events-auto"><PriceButton url={r.price_url} testId={`ver-preco-${r.id}`} dark={false} /></span>
     </div>
   </motion.article>
   );
