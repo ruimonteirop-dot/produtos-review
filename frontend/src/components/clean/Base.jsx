@@ -26,8 +26,8 @@ export const Label = ({ children, n }) => (
 
 export const LogoMark = ({ size = 32 }) => (
   <svg width={size} height={size} viewBox="0 0 40 40" fill="none" aria-hidden="true">
-    <rect width="40" height="40" rx="11" fill="#111111" />
-    <path d="M11 27V14l4.5 6.5L20 14l4.5 6.5L29 14v13" stroke="#FFFFFF" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    <rect width="40" height="40" rx="11" fill="var(--ink)" />
+    <path d="M11 27V14l4.5 6.5L20 14l4.5 6.5L29 14v13" stroke="var(--bg)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
     <circle cx="31.5" cy="8.5" r="3.5" fill="#5B3DF5" />
   </svg>
 );
@@ -36,7 +36,7 @@ export const PriceButton = ({ url, testId, label = "Ver preço", dark = true }) 
   const onClick = (e) => {
     if (!url || url === "#") {
       e.preventDefault();
-      toast("Link de oferta ainda não configurado", { description: "Adicione o link da loja ou de afiliado no arquivo de reviews." });
+      toast("Link de oferta ainda não configurado", { description: "Adiciona o link da loja ou de afiliado no painel." });
     }
   };
   return (
@@ -46,7 +46,7 @@ export const PriceButton = ({ url, testId, label = "Ver preço", dark = true }) 
       rel="noopener noreferrer sponsored"
       onClick={onClick}
       data-testid={testId}
-      className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 ${dark ? "bg-[var(--ink)] text-white hover:bg-[var(--accent)]" : "bg-white text-[var(--ink)] hover:bg-[var(--accent)] hover:text-white"}`}
+      className={`group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 ${dark ? "bg-[var(--ink)] text-[var(--on-ink)] hover:bg-[var(--accent)] hover:text-white" : "bg-white text-[#111] hover:bg-[var(--accent)] hover:text-white"}`}
     >
       {label}
       <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

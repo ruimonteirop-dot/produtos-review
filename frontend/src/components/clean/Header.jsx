@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LogoMark, EASE } from "./Base";
 import { scrollToId } from "../SmoothScroll";
+import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [["destaque", "Destaque"], ["reviews", "Reviews"], ["metodo", "Método"], ["clube", "Newsletter"]];
 
@@ -18,7 +19,7 @@ export const Header = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
       data-testid="header-navigation"
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${scrolled ? "bg-[rgba(250,250,248,0.82)] backdrop-blur-xl border-b border-[var(--line)]" : "bg-transparent border-b border-transparent"}`}
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${scrolled ? "glass border-b border-[var(--line)]" : "bg-transparent border-b border-transparent"}`}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#topo" data-testid="header-logo" className="flex items-center gap-2.5">
@@ -32,9 +33,12 @@ export const Header = () => {
             </button>
           ))}
         </nav>
-        <button data-testid="header-cta" onClick={() => scrollToId("destaque")} className="text-sm font-medium rounded-full border border-[var(--ink)] px-4 py-1.5 hover:bg-[var(--ink)] hover:text-white transition-colors">
-          Última review
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button data-testid="header-cta" onClick={() => scrollToId("destaque")} className="text-sm font-medium rounded-full border border-[var(--ink)] px-4 py-1.5 hover:bg-[var(--ink)] hover:text-[var(--on-ink)] transition-colors">
+            Última review
+          </button>
+        </div>
       </div>
     </motion.header>
   );

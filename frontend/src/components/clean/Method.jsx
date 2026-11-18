@@ -6,8 +6,8 @@ export const Method = () => (
     <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12">
       <Reveal className="lg:col-span-5">
         <Label n="03">Como eu avalio</Label>
-        <h2 className="font-display tracking-[-0.03em] text-4xl sm:text-6xl mt-6 leading-[1.02]">Quatro regras, <em className="font-serif text-[var(--muted)]">zero jabá.</em></h2>
-        <p className="mt-6 max-w-sm text-[var(--muted)] leading-relaxed">Toda review segue o mesmo caminho, do carrinho ao veredito. Assim você compara produtos com a mesma régua.</p>
+        <h2 className="font-display tracking-[-0.03em] text-4xl sm:text-6xl mt-6 leading-[1.02]">Quatro regras, <em className="font-serif text-[var(--muted)]">zero patrocínios.</em></h2>
+        <p className="mt-6 max-w-sm text-[var(--muted)] leading-relaxed">Todas as reviews seguem o mesmo caminho, do carrinho ao veredicto. Assim comparas produtos com a mesma bitola.</p>
       </Reveal>
       <div className="lg:col-span-6 lg:col-start-7">
         {METHOD.map((m, i) => (

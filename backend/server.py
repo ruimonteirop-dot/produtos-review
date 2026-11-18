@@ -12,6 +12,9 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 import uuid
 from datetime import datetime, timezone
+from auth import router as auth_router, seed_admin
+from reviews import router as reviews_router, seed_reviews
+from storage import init_storage
 
 
 ROOT_DIR = Path(__file__).parent
@@ -31,6 +34,10 @@ INDEXES: dict[str, list[IndexModel]] = {
     "newsletter": [
         IndexModel([("email", ASCENDING)], name="email", unique=True),
     ],
+    "users": [IndexModel([("email", ASCENDING)], name="email", unique=True), IndexModel([("id", ASCENDING)], name="id", unique=True)],
+    "login_attempts": [IndexModel([("identifier", ASCENDING)], name="identifier")],
+    "reviews": [IndexModel([("id", ASCENDING)], name="id", unique=True), IndexModel([("published", ASCENDING), ("created_at", DESCENDING)], name="pub_created")],
+    "files": [IndexModel([("storage_path", ASCENDING)], name="storage_path")],
 }
 
 
@@ -105,6 +112,8 @@ async def subscribe(input: NewsletterIn):
 
 # Include the router in the main app
 app.include_router(api_router)
+app.include_router(auth_router)
+app.include_router(reviews_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -124,6 +133,12 @@ logger = logging.getLogger(__name__)
 @app.on_event("startup")
 async def start_index_build():
     app.state.index_task = asyncio.create_task(ensure_indexes())  # background: a big index build must not block boot
+    await seed_admin()
+    await seed_reviews()
+    try:
+        await asyncio.to_thread(init_storage)
+    except Exception as exc:
+        logger.error("Storage init failed: %s", exc)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():

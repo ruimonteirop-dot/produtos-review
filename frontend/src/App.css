@@ -4,7 +4,23 @@
   --muted: #66645E;
   --line: #E3E1DC;
   --accent: #5B3DF5;
+  --on-ink: #FFFFFF;
+  --surface: #ECEBE7;
 }
+
+html.dark {
+  --bg: #0F0F0E;
+  --ink: #F2F1EC;
+  --muted: #A6A49C;
+  --line: #2B2A27;
+  --accent: #8A75FF;
+  --on-ink: #111111;
+  --surface: #1C1B19;
+  color-scheme: dark;
+}
+
+body, header, footer, section { transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; }
+.glass { background: color-mix(in srgb, var(--bg) 85%, transparent); color: var(--ink); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }

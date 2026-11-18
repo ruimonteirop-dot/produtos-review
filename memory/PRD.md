@@ -17,6 +17,12 @@ User choices: nome "Myg Reviews"; só o dono escreve reviews; botão "Ver preço
 ## Core requirements
 - Hero cinético, review em destaque com nota/prós/contras/galeria, grid de reviews com filtro, método, newsletter, "Ver preço" por produto
 
+## Implemented (2026-11-18)
+- Painel /admin (login email + palavra-passe, admin único semeado do .env): criar/editar/apagar reviews, rascunho/publicada, destaque único, carregar fotos (object storage), legenda e foto principal
+- Reviews agora vêm da base de dados (GET /api/reviews); 5 reviews iniciais semeadas
+- Modo escuro com botão (site e painel), guarda a escolha, respeita preferência do sistema
+- Todo o texto em Português de Portugal
+
 ## Implemented (2026-11-17)
 - Redesign clean (mesmo dia, a pedido): fundo off-white, tipografia Onest + Instrument Serif itálico, acento violeta único, linhas finas; componentes em `components/clean/`
 - Hero com reveal linha a linha, card 3D tilt + parallax, marquee editorial, review AP-25 com galeria das 3 fotos, bento com filtros, método, Clube Myg (newsletter real no Mongo), footer com aviso de afiliado, logo/favicon SVG
