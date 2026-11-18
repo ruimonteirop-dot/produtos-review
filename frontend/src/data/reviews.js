@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Myg Reviews",
   handle: "@mygreviews",
-  email: "[o-teu-email@exemplo.com]",
+  email: "reviewsmyg@gmail.com",
 };
 
 export const FALLBACK_PHOTO = "/products/ap25-hero.jpg";

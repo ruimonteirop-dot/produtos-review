@@ -20,7 +20,7 @@ export const Footer = () => (
         </ul>
         <ul className="md:col-span-3 space-y-2 text-sm text-[var(--muted)]">
           <li>{SITE.handle}</li>
-          <li>{SITE.email}</li>
+          <li><a href={`mailto:${SITE.email}`} className="hover:text-[var(--ink)]">{SITE.email}</a></li>
         </ul>
         <div className="md:col-span-1 md:justify-self-end">
           <button data-testid="back-to-top" onClick={() => scrollToId("topo")} aria-label="Voltar ao topo" className="w-11 h-11 rounded-full border border-[var(--line)] grid place-items-center hover:bg-[var(--ink)] hover:text-[var(--on-ink)] transition-colors">
