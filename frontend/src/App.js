@@ -1,6 +1,7 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 import Landing from "./pages/Landing";
 import AdminLogin from "./pages/AdminLogin";
 import AdminPanel from "./pages/AdminPanel";
@@ -19,6 +20,8 @@ function App() {
           <Route path="/admin" element={<RequireAdmin><AdminPanel /></RequireAdmin>} />
         </Routes>
       </BrowserRouter>
+      {/* Vercel Web Analytics: sem cookies; não conta as visitas ao painel /admin */}
+      <Analytics beforeSend={(e) => (new URL(e.url).pathname.startsWith("/admin") ? null : e)} />
     </AuthProvider>
   );
 }
