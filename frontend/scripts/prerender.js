@@ -66,7 +66,6 @@ function headFor({ title, description, url, image, extra = "" }) {
     `<meta name="description" content="${esc(description)}" />`,
     url ? `<link rel="canonical" href="${esc(url)}" />` : "",
     `<meta property="og:type" content="article" />`,
-    `<meta property="og:site_name" content="${SITE_NAME}" />`,
     `<meta property="og:title" content="${esc(title)}" />`,
     `<meta property="og:description" content="${esc(description)}" />`,
     url ? `<meta property="og:url" content="${esc(url)}" />` : "",
@@ -142,6 +141,14 @@ function inject(template, head, rootHtml) {
     description: "Reviews honestas de produtos testados em casa. Nota, prós, contras e o melhor preço, com a origem de cada produto sempre indicada.",
     url: SITE ? `${SITE}/` : "",
     image: reviews[0]?.photos?.[0] ? abs(reviews[0].photos[0].src) : "",
+    extra: SITE ? `<script type="application/ld+json">${JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      alternateName: ["MygReviews", "Myg Reviews: reviews de produtos"],
+      url: `${SITE}/`,
+      inLanguage: "pt-PT",
+    }).replace(/</g, "\\u003c")}</script>` : "",
   });
   fs.writeFileSync(path.join(BUILD, "index.html"), inject(template, homeHead, homeStatic(reviews)));
   // Fallback limpo para as rotas da SPA (/admin, etc.)
